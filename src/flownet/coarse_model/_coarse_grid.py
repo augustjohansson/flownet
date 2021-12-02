@@ -354,4 +354,4 @@ class CoarseGrid:
                     inside, start_ijk = self._in_ecl_grid(xyz, start_ijk)
                     if inside:
                         self._actnum[cnt] = 1
-                        cnt += 1
+                    cnt += 1
