@@ -60,6 +60,13 @@ class CoarseGrid:
             self.coordinates, self.num_nodes, self.num_elements, self.actnum
         )
 
+    def save_mat(self, filename=None):
+        d = {"coords": self.coordinates, "actnum": self.actnum}
+        if filename is None:
+            filename = "test1.mat"
+        from scipy.io import savemat
+        savemat(filename, d)
+
     def _create_coarse_grid(self) -> None:
         """
 
