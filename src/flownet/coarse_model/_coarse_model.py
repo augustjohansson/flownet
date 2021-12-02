@@ -19,7 +19,8 @@ class CoarseModel:
         self._ecl_grid = ecl_grid
         self._well_coords: np.array = df_well_connections[["X", "Y", "Z"]].to_numpy()
         self._partition = partition
-        self._grid: pd.DataFrame = self._create_coarse_grid()
+        self._CG = CoarseGrid(self._ecl_grid, self._well_coords, self._partition)
+        self._grid: pd.DataFrame = self._CG.df_grid()
 
     def _create_coarse_grid(self) -> None:
         """
@@ -29,6 +30,6 @@ class CoarseModel:
         CG = CoarseGrid(self._ecl_grid, self._well_coords, self._partition)
 
         # Convert to pd matching NetworkModel.grid
-        self._grid = create_df_grid(
+        return create_df_grid(
             CG.coordinates, CG.num_nodes, CG.num_elements, CG.actnum
         )
